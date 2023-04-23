@@ -1,10 +1,10 @@
 #!/bin/zsh
 
 #settings
-export CC=clang
-export CFLAGS=(-Wall -Werror)
-export SRC=src
-export BUILD=dist
+CC=clang
+CFLAGS=(-Wall -Werror)
+SRC=src
+BUILD=dist
 
 
 # build
