@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+#settings
+export CC=clang
+export CFLAGS=(-Wall -Werror)
+export SRC=src
+export BUILD=dist
+
+
+# build
+find "$SRC" -type f -name "*.c" | while read src_filepath; do
+    path_to_file_wo_ext="${src_filepath%.*}"
+    program_name=$(basename $path_to_file_wo_ext)
+    program_path=$(dirname "${path_to_file_wo_ext#$SRC/}")
+    
+    echo --------">" $program_path/$program_name
+    mkdir -p $BUILD/$program_path
+
+    echo ------">" Compiling $src_filepath to $BUILD/$program_path/$program_name
+    echo ----">" $CC $CFLAGS -o $BUILD/$program_path/$program_name $src_filepath
+    "$CC" "${CFLAGS[@]}" -o "$BUILD/$program_path/$program_name" "$src_filepath"
+    echo --">" Builded $BUILD/$program_path/$program_name
+done
