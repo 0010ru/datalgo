@@ -20,4 +20,6 @@ find "$SRC" -type f -name "*.c" | while read src_filepath; do
     echo ----">" $CC $CFLAGS -o $BUILD/$program_path/$program_name $src_filepath
     "$CC" "${CFLAGS[@]}" -o "$BUILD/$program_path/$program_name" "$src_filepath"
     echo --">" Builded $BUILD/$program_path/$program_name
+
+    echo "\n"
 done
