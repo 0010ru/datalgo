@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-#settings
+# settings
 CC=clang
 CFLAGS=(-Wall -Werror)
 SRC=src
