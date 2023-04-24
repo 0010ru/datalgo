@@ -2,7 +2,7 @@ import random
 
 
 def list_of_ints(n: int, a: int, b: int) -> None:
-    with open("list.txt", "w") as fp:
+    with open("data/arrays/main_stress.txt", "w") as fp:
         for _ in range(n):
             i = random.randint(a=a, b=b)
             fp.write(f'{i}\n')
