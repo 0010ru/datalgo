@@ -39,6 +39,13 @@ void push_back(struct Array* arr, int16_t value) {
         }
         arr->data = tmp;
     }
+    else if (arr->data == NULL) {
+        arr->data = malloc(arr->capacity * sizeof(int16_t));
+        if (arr->data == NULL) {
+            perror("[malloc] Error while allocating memory");
+            exit(EXIT_FAILURE);
+        }
+    }
     arr->data[arr->size++] = value;
 }
 
@@ -66,15 +73,8 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    struct Array arr = {NULL, 0, 64};
-    arr.data = malloc(arr.capacity * sizeof(int16_t));
-    if (arr.data == NULL) {
-        perror("[malloc] Error while allocating memory");
-        fclose(fp);
-        return EXIT_FAILURE;
-    }
-
-    char *line = NULL;
+    struct Array arr = { NULL, 0, 64 };
+    char* line = NULL;
     size_t line_len = 0;
 
     ssize_t read;
