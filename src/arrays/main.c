@@ -77,7 +77,6 @@ int main(int argc, char *argv[]) {
     char *line = NULL;
     size_t line_len = 0;
 
-    // Fill the array with data from the file
     ssize_t read;
     while ((read = getline(&line, &line_len, fp)) != -1) {
         int16_t num = 0;
