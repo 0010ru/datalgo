@@ -44,7 +44,7 @@ int main(int argc, const char *argv[]) {
 
     struct Array arr;
     arr.size = 0;
-    arr.capacity = 1;
+    arr.capacity = 52;
     arr.data = (int*)malloc(arr.capacity * sizeof(int));
 
     // The array is filled with data from the file
