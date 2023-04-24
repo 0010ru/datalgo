@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    struct Array arr = {NULL, 0, 52};
+    struct Array arr = {NULL, 0, 64};
     arr.data = malloc(arr.capacity * sizeof(int16_t));
     if (arr.data == NULL) {
         perror("Error while allocating memory");
