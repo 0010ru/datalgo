@@ -34,6 +34,7 @@ int main(int argc, const char *argv[]) {
         for (size_t i = 0; i < (size_t)argc; i++)
             fprintf(stderr, "%s ", argv[i]);
         fprintf(stderr, "\n");
+
         return EXIT_FAILURE;
     }
 
@@ -41,6 +42,8 @@ int main(int argc, const char *argv[]) {
     if (fp == NULL) {
         fprintf(stderr, "Cannot open file '%s': ", argv[1]);
         perror("");
+        fclose(fp);
+
         return EXIT_FAILURE;
     }
 
@@ -54,6 +57,10 @@ int main(int argc, const char *argv[]) {
     arr.data = (int16_t*)malloc(arr.capacity * sizeof(int16_t));
     if (arr.data == NULL) {
         perror("Error while allocating memory");
+        free(line);
+        free(arr.data);
+        fclose(fp);
+
         return EXIT_FAILURE;
     }
 
@@ -64,6 +71,11 @@ int main(int argc, const char *argv[]) {
             push_back(&arr, num);
         } else {
             fprintf(stderr, "Invalid input: %s\n", line);
+            free(line);
+            free(arr.data);
+            fclose(fp);
+
+            return EXIT_FAILURE;
         }
     }
 
@@ -78,10 +90,16 @@ int main(int argc, const char *argv[]) {
     if (ferror(fp)) {
         fprintf(stderr, "Error while reading file '%s': ", argv[1]);
         perror("");
+        free(line);
+        free(arr.data);
+        fclose(fp);
+
+        return EXIT_FAILURE;
     }
 
-    free(arr.data);
     free(line);
+    free(arr.data);
     fclose(fp);
+
     return EXIT_SUCCESS;
 }
