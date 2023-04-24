@@ -1,16 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 struct Array {
-    int* data;
+    int16_t* data;
     size_t size;
     size_t capacity;
 };
 
-void push_back(struct Array* arr, int value) {
+void push_back(struct Array* arr, int16_t value) {
     if (arr->size == arr->capacity) {
+        if (arr->capacity > SIZE_MAX / 2) {
+            perror("Error while reallocating memory");
+            exit(EXIT_FAILURE);
+        }
         arr->capacity *= 2;
-        int* tmp = (int*)realloc(arr->data, arr->capacity * sizeof(int));
+        int16_t* tmp = (int16_t*)realloc(arr->data, arr->capacity * sizeof(int16_t));
         if (tmp == NULL) {
             perror("Error while reallocating memory");
             exit(EXIT_FAILURE);
@@ -34,8 +39,9 @@ int main(int argc, const char *argv[]) {
 
     FILE *fp = fopen(argv[1], "r");
     if (fp == NULL) {
-        perror("Error while opening file");
-        exit(EXIT_FAILURE);
+        fprintf(stderr, "Cannot open file '%s': ", argv[1]);
+        perror("");
+        return EXIT_FAILURE;
     }
 
     char *line = NULL;
@@ -45,11 +51,11 @@ int main(int argc, const char *argv[]) {
     struct Array arr;
     arr.size = 0;
     arr.capacity = 52;
-    arr.data = (int*)malloc(arr.capacity * sizeof(int));
+    arr.data = (int16_t*)malloc(arr.capacity * sizeof(int16_t));
 
     // The array is filled with data from the file
     while ((read = getline(&line, &line_len, fp)) != -1) {
-        int num = strtol(line, NULL, 10);
+        int16_t num = strtol(line, NULL, 10);
         push_back(&arr, num);
     }
 
@@ -62,7 +68,8 @@ int main(int argc, const char *argv[]) {
     printf("]\n");
 
     if (ferror(fp)) {
-        perror("Error while reading file");
+        fprintf(stderr, "Error while reading file '%s': ", argv[1]);
+        perror("");
     }
 
     free(arr.data);
