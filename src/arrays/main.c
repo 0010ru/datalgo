@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <time.h>
 
 struct Array {
     int16_t* data;
@@ -8,22 +9,49 @@ struct Array {
     size_t capacity;
 };
 
+
+void reshuffle(struct Array* arr) {
+    if (arr == NULL) {
+        fprintf(stderr, "[reshuffle] Array pointer is null");
+        exit(EXIT_FAILURE);
+    }
+    srand(time(NULL));
+    for (size_t i = arr->size - 1; i > 0; i--) {
+        size_t j = rand() % (i + 1);
+        int16_t temp = arr->data[i];
+        arr->data[i] = arr->data[j];
+        arr->data[j] = temp;
+    }
+}
+
+
 void push_back(struct Array* arr, int16_t value) {
     if (arr == NULL) {
-        perror("Array pointer is null");
+        fprintf(stderr, "[push_back] Array pointer is null");
         exit(EXIT_FAILURE);
     }
     if (arr->size == arr->capacity) {
         arr->capacity *= 2;
         int16_t* tmp = realloc(arr->data, arr->capacity * sizeof(int16_t));
         if (tmp == NULL) {
-            perror("Error while reallocating memory");
+           fprintf(stderr, "[realloc] Error while reallocating memory");
             exit(EXIT_FAILURE);
         }
         arr->data = tmp;
     }
     arr->data[arr->size++] = value;
 }
+
+
+void display(const char *name, struct Array* arr) {
+    printf("%s = [", name);
+    for (size_t i = 0; i < arr->size; i++) {
+        if (i < arr->size - 1) printf("%hd, ", arr->data[i]);
+        else printf("%hd", arr->data[i]);
+    }
+    printf("]\n");
+}
+
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -34,14 +62,14 @@ int main(int argc, char *argv[]) {
 
     FILE *fp = fopen(argv[1], "r");
     if (fp == NULL) {
-        perror("Error while opening file");
+        perror("[fopen] Error while opening file");
         return EXIT_FAILURE;
     }
 
     struct Array arr = {NULL, 0, 64};
     arr.data = malloc(arr.capacity * sizeof(int16_t));
     if (arr.data == NULL) {
-        perror("Error while allocating memory");
+        perror("[malloc] Error while allocating memory");
         fclose(fp);
         return EXIT_FAILURE;
     }
@@ -56,7 +84,7 @@ int main(int argc, char *argv[]) {
         if (sscanf(line, "%hd", &num) == 1) {
             push_back(&arr, num);
         } else {
-            fprintf(stderr, "Invalid input: %s\n", line);
+            fprintf(stderr, "[sscanf] Invalid input: %s\n", line);
             free(line);
             fclose(fp);
             free(arr.data);
@@ -65,15 +93,11 @@ int main(int argc, char *argv[]) {
     }
     free(line);
     fclose(fp);
+    display("file data", &arr);
 
-    // Print all values
-    printf("Input data = [");
-    for (size_t i = 0; i < arr.size; i++) {
-        if (i < arr.size - 1) printf("%hd, ", arr.data[i]);
-        else printf("%hd", arr.data[i]);
-    }
-    printf("]\n");
+    reshuffle(&arr);
+    display("reshuffled", &arr);
+
     free(arr.data);
-
     return EXIT_SUCCESS;
 }
