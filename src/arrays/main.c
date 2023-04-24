@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <unistd.h>
 
 struct Array {
     int16_t* data;
@@ -10,7 +11,7 @@ struct Array {
 
 void push_back(struct Array* arr, int16_t value) {
     if (arr->size == arr->capacity) {
-        if (arr->capacity > SIZE_MAX / 2) {
+        if (arr->capacity >= SIZE_MAX/sizeof(int16_t)) {
             perror("Error while reallocating memory");
             exit(EXIT_FAILURE);
         }
@@ -24,7 +25,6 @@ void push_back(struct Array* arr, int16_t value) {
     }
     arr->data[arr->size++] = value;
 }
-
 
 int main(int argc, const char *argv[]) {
     if (argc != 2) {
@@ -52,18 +52,26 @@ int main(int argc, const char *argv[]) {
     arr.size = 0;
     arr.capacity = 52;
     arr.data = (int16_t*)malloc(arr.capacity * sizeof(int16_t));
+    if (arr.data == NULL) {
+        perror("Error while allocating memory");
+        return EXIT_FAILURE;
+    }
 
     // The array is filled with data from the file
     while ((read = getline(&line, &line_len, fp)) != -1) {
-        int16_t num = strtol(line, NULL, 10);
-        push_back(&arr, num);
+        int16_t num = 0;
+        if (sscanf(line, "%hd", &num) == 1) {
+            push_back(&arr, num);
+        } else {
+            fprintf(stderr, "Invalid input: %s\n", line);
+        }
     }
 
     // Print all values
     printf("input data = [");
-    for (size_t i = 0; i < (size_t)arr.size; i++) {
-        if (i < (size_t)(arr.size - 1)) printf("%d, ", arr.data[i]);
-        else printf("%d", arr.data[i]);
+    for (size_t i = 0; i < arr.size; i++) {
+        if (i < arr.size - 1) printf("%hd, ", arr.data[i]);
+        else printf("%hd", arr.data[i]);
     }
     printf("]\n");
 
