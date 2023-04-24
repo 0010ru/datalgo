@@ -2,7 +2,7 @@
 
 # settings
 CC=clang
-CFLAGS=(-Wall -Werror)
+CFLAGS=(-Wall -Werror -Wextra -pedantic)
 SRC=src
 BUILD=dist
 
