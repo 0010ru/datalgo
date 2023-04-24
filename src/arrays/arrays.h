@@ -1,6 +1,12 @@
 #ifndef ARRAYS_H
 #define ARRAYS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <time.h>
+
+
 struct Array {
     int16_t* data;
     size_t size;
