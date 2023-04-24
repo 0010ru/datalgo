@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    struct Array arr = { NULL, 0, 64 };
+    struct Array arr = { NULL, 0, 64, 64 };
     char* line = NULL;
     size_t line_len = 0;
 

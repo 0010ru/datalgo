@@ -10,6 +10,7 @@
 struct Array {
     int16_t* data;
     size_t size;
+    size_t chunksize;
     size_t capacity;
 };
 
@@ -35,7 +36,7 @@ void push_back(struct Array* arr, int16_t value) {
         exit(EXIT_FAILURE);
     }
     if (arr->size == arr->capacity) {
-        arr->capacity *= 2;
+        arr->capacity += arr->chunksize;
         int16_t* tmp = realloc(arr->data, arr->capacity * sizeof(int16_t));
         if (tmp == NULL) {
            fprintf(stderr, "[realloc] Error while reallocating memory");
