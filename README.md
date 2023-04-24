@@ -2,7 +2,7 @@
 
 This repository contains code written in C for learning algorithms and data structures. The repository is structured as follows:
 
-- `data/arrays/*.txt`: sample input data for algorithms.
+- `data/**/*.txt`: sample input data for algorithms.
 - `src/**/*.c`: implementation of manipulation algorithms, including sorting and searching.
 - `src/arrays/arrays.h`: header file defining functions for array manipulation algorithms.
 - `build`: zsh script defining the build system for the project.
