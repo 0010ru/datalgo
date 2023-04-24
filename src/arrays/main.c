@@ -9,6 +9,10 @@ struct Array {
 };
 
 void push_back(struct Array* arr, int16_t value) {
+    if (arr == NULL) {
+        perror("Array pointer is null");
+        exit(EXIT_FAILURE);
+    }
     if (arr->size == arr->capacity) {
         arr->capacity *= 2;
         int16_t* tmp = realloc(arr->data, arr->capacity * sizeof(int16_t));
@@ -54,8 +58,8 @@ int main(int argc, char *argv[]) {
         } else {
             fprintf(stderr, "Invalid input: %s\n", line);
             free(line);
-            free(arr.data);
             fclose(fp);
+            free(arr.data);
             return EXIT_FAILURE;
         }
     }
