@@ -22,7 +22,8 @@ int main(int argc, char *argv[]) {
     while ((read = getline(&line, &line_len, fp)) != -1) {
         int16_t num = 0;
         if (sscanf(line, "%hd", &num) == 1) {
-            push_back(&arr, num);
+            ssize_t res = push(&arr, num);
+            if (res != EXIT_SUCCESS) return EXIT_FAILURE;
         } else {
             fprintf(stderr, "[sscanf] Invalid input: %s\n", line);
             free(line);
@@ -35,8 +36,10 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     display("file data", &arr);
 
-    reshuffle(&arr);
-    display("reshuffled", &arr);
+    int16_t last_element = 0;
+    ssize_t res = get(&arr, -1, &last_element);
+    if (res != EXIT_SUCCESS) return EXIT_FAILURE;
+    printf("last element = %hd\n", last_element);
 
     free(arr.data);
     return EXIT_SUCCESS;
