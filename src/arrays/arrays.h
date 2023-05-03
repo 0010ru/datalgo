@@ -81,7 +81,6 @@ ssize_t swap(struct Array* arr, ssize_t index1, ssize_t index2) {
         fprintf(stderr, "[get] Index out of range index1=%ld or index2=%ld\n", index1, index2);
         return EXIT_FAILURE;
     }
-
     return EXIT_SUCCESS;
 }
 
@@ -97,7 +96,6 @@ void sort_insertion(struct Array* arr) {
             arr->data[j] = arr->data[j-1];
             j--;
         }
-
         arr->data[j] = x;
     }
 }
