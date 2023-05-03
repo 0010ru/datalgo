@@ -23,3 +23,9 @@ find "$SRC" -type f -name "*.c" | while read src_filepath; do
 
     echo "\n"
 done
+
+
+# todo: refactor to autobuild from .ll files to executable
+mkdir -p dist/memory
+llc -filetype=obj -relocation-model=pic src/memory/memory_write_read_asm.ll -o dist/memory/memory_write_read_asm.o
+"$CC" -fPIE -pie dist/memory/memory_write_read_asm.o -o dist/memory/memory_write_read_asm
