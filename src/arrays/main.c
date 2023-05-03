@@ -1,14 +1,14 @@
 #include "arrays.h"
 
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     if (argc != 2) {
         fprintf(stderr, "Error: invalid number of arguments!\n");
         fprintf(stderr, "Usage: %s [filename]\n", argv[0]);
         return EXIT_FAILURE;
     }
 
-    FILE *fp = fopen(argv[1], "r");
+    FILE* fp = fopen(argv[1], "r");
     if (fp == NULL) {
         perror("[fopen] Error while opening file");
         return EXIT_FAILURE;

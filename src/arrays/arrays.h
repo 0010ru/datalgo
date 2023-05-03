@@ -9,14 +9,14 @@
 
 
 struct Array {
-    int64_t *data;
+    int64_t* data;
     size_t size;
     size_t capacity;
     size_t _chunksize;
 };
 
 
-ssize_t push(struct Array *arr, int64_t value) {
+ssize_t push(struct Array* arr, int64_t value) {
     if (arr == NULL) {
         fprintf(stderr, "[push_back] Array pointer is null");
         return EXIT_FAILURE;
@@ -42,7 +42,7 @@ ssize_t push(struct Array *arr, int64_t value) {
 }
 
 
-ssize_t display(const char *name, struct Array *arr) {
+ssize_t display(const char* name, struct Array* arr) {
     printf("%s = [", name);
     for (size_t i = 0; i < arr->size; i++) {
         if (i < arr->size - 1) printf("%ld, ", arr->data[i]);
@@ -53,12 +53,12 @@ ssize_t display(const char *name, struct Array *arr) {
 }
 
 
-bool is_it_out_of_range(struct Array *arr, ssize_t index) {
+bool is_it_out_of_range(struct Array* arr, ssize_t index) {
     return index < 0 || index >= (ssize_t) arr->size;
 }
 
 
-ssize_t get(struct Array *arr, ssize_t index, int64_t *value) {
+ssize_t get(struct Array* arr, ssize_t index, int64_t* value) {
     if (index < 0) index = arr->size + index;
     if (!is_it_out_of_range(arr, index)) {
         *value = arr->data[index];
@@ -70,7 +70,7 @@ ssize_t get(struct Array *arr, ssize_t index, int64_t *value) {
 }
 
 
-ssize_t swap(struct Array *arr, ssize_t index1, ssize_t index2) {
+ssize_t swap(struct Array* arr, ssize_t index1, ssize_t index2) {
     if (index1 < 0) index1 = arr->size + index1;
     if (index2 < 0) index2 = arr->size + index2;
     if (!is_it_out_of_range(arr, index1) || !is_it_out_of_range(arr, index2)) {
@@ -86,7 +86,7 @@ ssize_t swap(struct Array *arr, ssize_t index1, ssize_t index2) {
 }
 
 
-void sort_insertion(struct Array *arr) {
+void sort_insertion(struct Array* arr) {
     size_t i, j;
     int64_t x;
     for (i = 1; i < arr->size; i++) {
@@ -103,7 +103,7 @@ void sort_insertion(struct Array *arr) {
 }
 
 
-void sort(struct Array *arr) {
+void sort(struct Array* arr) {
     sort_insertion(arr);
 }
 
