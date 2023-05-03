@@ -20,8 +20,8 @@ int main(int argc, char *argv[]) {
 
     ssize_t read;
     while ((read = getline(&line, &line_len, fp)) != -1) {
-        int16_t num = 0;
-        if (sscanf(line, "%hd", &num) == 1) {
+        int64_t num = 0;
+        if (sscanf(line, "%ld", &num) == 1) {
             ssize_t res = push(&arr, num);
             if (res != EXIT_SUCCESS) return EXIT_FAILURE;
         } else {
@@ -35,11 +35,21 @@ int main(int argc, char *argv[]) {
     free(line);
     fclose(fp);
     display("file data", &arr);
+    printf("\n");
 
-    int16_t last_element = 0;
+    int64_t last_element = 0;
     ssize_t res = get(&arr, -1, &last_element);
     if (res != EXIT_SUCCESS) return EXIT_FAILURE;
-    printf("last element = %hd\n", last_element);
+    printf("last element = %ld\n", last_element);
+    printf("\n");
+
+    swap(&arr, -1, -2);
+    display("swaped -1 and -2 = ", &arr);
+    printf("\n");
+
+    sort(&arr);
+    display("sorted", &arr);
+    printf("\n");
 
     free(arr.data);
     return EXIT_SUCCESS;
