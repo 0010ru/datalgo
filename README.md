@@ -1,6 +1,6 @@
 # DatAlgo
 
-This repository contains code written in C for learning algorithms and data structures. The repository is structured as follows:
+This repository contains code written in C and LLVM Assembler code for learning algorithms and data structures. The repository is structured as follows:
 
 - `data/**/*.txt`: sample input data for algorithms.
 - `src/**/*.c`: implementation of manipulation algorithms, including sorting and searching.
