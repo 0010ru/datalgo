@@ -85,6 +85,16 @@ ssize_t swap(struct Array* arr, ssize_t index1, ssize_t index2) {
 }
 
 
+/*
+Sorts an array of integers using the insertion sort algorithm.
+
+@param arr Pointer to an Array structure representing the array.
+@return Return code of the function.
+
+The insertion sort algorithm involves iterating through the array from the second element to the end. At each iteration, we take the element at the current position and compare it with the previous elements. If the previous element is greater than the current one, we shift it to the right by one position. We continue to shift elements until we find an element that is less than or equal to the current one. Then we insert the current element at the found position.
+
+The time complexity of the algorithm is O(n^2) in the worst case and O(n) in the best case when the array is already sorted. The space complexity of the algorithm is O(1), since we do not use additional memory to store the elements.
+*/
 ssize_t sort_insertion(struct Array* arr) {
     size_t i, j;
     int64_t x;
