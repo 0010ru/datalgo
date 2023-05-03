@@ -85,7 +85,7 @@ ssize_t swap(struct Array* arr, ssize_t index1, ssize_t index2) {
 }
 
 
-void sort_insertion(struct Array* arr) {
+ssize_t sort_insertion(struct Array* arr) {
     size_t i, j;
     int64_t x;
     for (i = 1; i < arr->size; i++) {
@@ -98,11 +98,8 @@ void sort_insertion(struct Array* arr) {
         }
         arr->data[j] = x;
     }
+    return EXIT_SUCCESS;
 }
 
-
-void sort(struct Array* arr) {
-    sort_insertion(arr);
-}
 
 #endif

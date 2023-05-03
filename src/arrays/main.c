@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
     display("swaped -1 and -2 = ", &arr);
     printf("\n");
 
-    sort(&arr);
+    sort_insertion(&arr);
     display("sorted", &arr);
     printf("\n");
 
