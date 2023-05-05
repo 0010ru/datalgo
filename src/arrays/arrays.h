@@ -110,16 +110,17 @@ ssize_t sort_insertion(struct Array* arr) {
     size_t i, j;
     int64_t x;
     for (i = 1; i < arr->size; i++) {
-        x = arr->data[i];
-        j = i;
-
+        x = arr->data[i]; // 8
+        j = i; // 1
+        
+        // 1 > 0 && 9 > 8
         while(j > 0 && arr->data[j-1] > x) {
-            arr->data[j] = arr->data[j-1];
-            j--;
+            arr->data[j] = arr->data[j-1]; // 8 = 9
+            j--; // 0
         }
-        arr->data[j] = x;
+        arr->data[j] = x; // 9 = 8
     }
-    return EXIT_SUCCESS;
+    return EXIT_SUCCESS; // 0
 }
 
 
