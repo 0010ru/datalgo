@@ -94,6 +94,17 @@ Sorts an array of integers using the insertion sort algorithm.
 The insertion sort algorithm involves iterating through the array from the second element to the end. At each iteration, we take the element at the current position and compare it with the previous elements. If the previous element is greater than the current one, we shift it to the right by one position. We continue to shift elements until we find an element that is less than or equal to the current one. Then we insert the current element at the found position.
 
 The time complexity of the algorithm is O(n^2) in the worst case and O(n) in the best case when the array is already sorted. The space complexity of the algorithm is O(1), since we do not use additional memory to store the elements.
+
+Illustration:
+
+Sart state - [9, 8, 7, 6, 4, 5]
+
+1. [8, 9, 7, 6, 4, 5]
+2. [7, 8, 9, 6, 4, 5]
+3. [6, 7, 8, 9, 4, 5]
+4. [4, 6, 7, 8, 9, 5]
+5. [4, 5, 6, 7, 8, 9]
+
 */
 ssize_t sort_insertion(struct Array* arr) {
     size_t i, j;
