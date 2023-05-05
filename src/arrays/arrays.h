@@ -97,8 +97,8 @@ The time complexity of the algorithm is O(n^2) in the worst case and O(n) in the
 
 Illustration:
 
-Sart state - [9, 8, 7, 6, 4, 5]
-
+Sart state [9, 8, 7, 6, 4, 5]
+Sorting states
 1. [8, 9, 7, 6, 4, 5]
 2. [7, 8, 9, 6, 4, 5]
 3. [6, 7, 8, 9, 4, 5]
