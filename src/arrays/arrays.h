@@ -107,6 +107,7 @@ Sorting states
 
 */
 ssize_t sort_insertion(struct Array* arr) {
+    if (arr->size < 2) return EXIT_SUCCESS;
     size_t i, j;
     int64_t x;
     for (i = 1; i < arr->size; i++) {
@@ -121,6 +122,18 @@ ssize_t sort_insertion(struct Array* arr) {
         arr->data[j] = x; // 9 = 8
     }
     return EXIT_SUCCESS; // 0
+}
+
+
+size_t sort_merge_part();
+
+
+ssize_t sort_merge(struct Array* arr) {
+    if (arr->size < 2) return EXIT_SUCCESS;
+
+    
+
+    return EXIT_SUCCESS;
 }
 
 
