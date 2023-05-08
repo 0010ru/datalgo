@@ -125,7 +125,6 @@ ssize_t sort_insertion(struct Array* arr) {
 }
 
 
-size_t sort_merge_part();
 
 
 ssize_t sort_merge(struct Array* arr) {
